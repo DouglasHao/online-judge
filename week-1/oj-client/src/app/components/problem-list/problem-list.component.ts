@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Problem } from '../../models/problem.model'
-
-const PROBLEMS: Problem[] = [
-  {
-    id: 1,
-    name: "Two Sum", 
-    description: "alfdslfs",
-    difficulty: "easy"
-  }
-];
+import { Problem } from '../../models/problem.model';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-problem-list',
@@ -17,14 +9,17 @@ const PROBLEMS: Problem[] = [
 })
 export class ProblemListComponent implements OnInit {
   problems: Problem[];
+  dataService: DataService;
 
-  constructor() { }
+  constructor() {
+    this.dataService = new DataService();
+  }
 
   ngOnInit() {
     this.getProblems();
   }
 
   getProblems(): void {
-    this.problems = PROBLEMS;
+    this.problems = this.dataService.getProblems();
   }
 }
